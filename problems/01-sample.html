@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: page title -->
+    <title>01 — What does this print?</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/highlight.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <a class="back" href="../index.html">All problems</a>
+
+      <!-- TODO: replace with the problem title from the book -->
+      <h1>What does this print?</h1>
+
+      <!-- TODO: replace with the problem description / prompt -->
+      <p class="description">
+        Read the snippet, then decide what gets printed and why before you run
+        it in a console.
+      </p>
+
+      <section class="code-frame" aria-label="Problem code">
+        <header>JavaScript</header>
+        <!-- TODO: replace with the book's code -->
+        <pre><code>function foo() {
+  var a = 2;
+
+  function bar() {
+    console.log(a);
+  }
+
+  return bar;
+}
+
+var baz = foo();
+baz();</code></pre>
+      </section>
+    </main>
+  </body>
+</html>

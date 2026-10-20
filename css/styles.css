@@ -1,0 +1,180 @@
+:root {
+  --bg: #0a0a0a;
+  --ink: #ffe566;
+  --muted: #c4a31a;
+  --line: #3a3208;
+  --accent: #ffd400;
+  --code-bg: #000000;
+  --code-ink: #f4e8c1;
+  --code-border: #ffd400;
+  --tok-comment: #7d8a5a;
+  --tok-keyword: #ffd400;
+  --tok-string: #ff9f1c;
+  --tok-number: #ff9f1c;
+  --tok-function: #fff7c2;
+  --tok-literal: #ffea70;
+  --tok-punct: #a3924a;
+  --tok-property: #f3edd8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+.page {
+  width: min(44rem, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.book-title {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.lede,
+.description {
+  margin: 0 0 1.75rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.problem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.problem-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.problem-list a {
+  display: block;
+  padding: 0.9rem 0.15rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.problem-list a:hover {
+  color: var(--accent);
+}
+
+.hint {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.hint code {
+  color: var(--accent);
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+.code-frame {
+  background: var(--code-bg);
+  color: var(--code-ink);
+  border: 1px solid var(--code-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.code-frame header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.code-frame pre {
+  margin: 0;
+  padding: 1.25rem 1.15rem 1.5rem;
+  overflow-x: auto;
+}
+
+.code-frame code {
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 1rem;
+  line-height: 1.75;
+  white-space: pre;
+  tab-size: 2;
+}
+
+.tok-comment {
+  color: var(--tok-comment);
+  font-style: italic;
+}
+
+.tok-keyword {
+  color: var(--tok-keyword);
+  font-weight: 700;
+}
+
+.tok-string {
+  color: var(--tok-string);
+}
+
+.tok-number {
+  color: var(--tok-number);
+}
+
+.tok-function {
+  color: var(--tok-function);
+  font-weight: 600;
+}
+
+.tok-literal {
+  color: var(--tok-literal);
+}
+
+.tok-punct {
+  color: var(--tok-punct);
+}
+
+.tok-property {
+  color: var(--tok-property);
+}
