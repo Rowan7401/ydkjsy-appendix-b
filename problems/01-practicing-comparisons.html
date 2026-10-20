@@ -26,14 +26,73 @@
       <section class="code-frame" aria-label="Problem code">
         <header>JavaScript</header>
         <script>
-          const dayStart = "07:30";
-          const dayEnd = "17:45";
+          const dayStart = "06:45";
+          const dayEnd = "17:00";
 
           function scheduleMeeting(startTime, durationMinutes) {
-            // TODO
+            // Write your implementation here!
+            if (startTime < dayStart) {
+              return false;
+            }
           }
         </script>
       </section>
+
+      <!-- TESTER CONTROL PANEL -->
+      <section class="tester-panel" aria-label="Function Controls">
+        <h2>Test Function</h2>
+        
+        <div class="field-group">
+          <label for="startTimeInput">Start Time (hh:mm):</label>
+          <input type="text" id="startTimeInput" value="07:00" placeholder="e.g. 07:00" />
+        </div>
+
+        <div class="field-group">
+          <label for="durationInput">Duration (Minutes):</label>
+          <input type="number" id="durationInput" value="30" placeholder="e.g. 30" />
+        </div>
+
+        <button type="button" class="exec-btn" id="runBtn">Execute Function</button>
+
+        <div class="output-console" id="outputConsole">
+          Outputs and return values will appear here...
+        </div>
+      </section>
     </main>
+
+    <script>
+      document.getElementById('runBtn').addEventListener('click', function () {
+        const startTimeVal = document.getElementById('startTimeInput').value;
+        const durationVal = Number(document.getElementById('durationInput').value);
+        const outputConsole = document.getElementById('outputConsole');
+
+        outputConsole.textContent = '';
+
+        const logs = [];
+        const originalLog = console.log;
+        console.log = function (...args) {
+          logs.push(args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' '));
+          originalLog.apply(console, args);
+        };
+
+        try {
+          const result = scheduleMeeting(startTimeVal, durationVal);
+
+          let outputText = '';
+          if (logs.length > 0) {
+            outputText += `[Console Logs]:\n${logs.join('\n')}\n\n`;
+          }
+          outputText += `[Return Value]: ${result}`;
+          
+          outputConsole.textContent = outputText;
+        } catch (error) {
+          outputConsole.textContent = `[Error]: ${error.message}`;
+        } finally {
+          console.log = originalLog;
+        }
+      });
+    </script>
+  </body>
+</html>
   </body>
 </html>

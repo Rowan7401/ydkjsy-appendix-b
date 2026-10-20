@@ -183,3 +183,65 @@ h1 {
 .tok-property {
   color: var(--tok-property);
 }
+
+.tester-panel {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: #f4f4f5;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.tester-panel h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #000000;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.field-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #3f3f46;
+}
+
+.field-group input {
+  padding: 0.5rem;
+  border: 1px solid #d4d4d8;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.exec-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.exec-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.output-console {
+  margin-top: 1rem;
+  background-color: #18181b;
+  color: #38bdf8;
+  font-family: monospace;
+  padding: 1rem;
+  border-radius: 6px;
+  min-height: 50px;
+  white-space: pre-wrap;
+}
