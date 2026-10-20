@@ -110,6 +110,11 @@ h1 {
   font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 
+.description code {
+  color: var(--accent);
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
 .code-frame {
   background: var(--code-bg);
   color: var(--code-ink);
