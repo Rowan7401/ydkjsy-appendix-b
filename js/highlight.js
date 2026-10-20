@@ -67,6 +67,15 @@
     return `<span class="tok-${kind}">${escapeHtml(value)}</span>`;
   }
 
+  function dedent(text) {
+    const lines = text.replace(/^\n/, "").replace(/\s+$/, "").split("\n");
+    const indents = lines
+      .filter((line) => line.trim())
+      .map((line) => line.match(/^[ \t]*/)[0].length);
+    const min = indents.length ? Math.min.apply(null, indents) : 0;
+    return lines.map((line) => line.slice(min)).join("\n");
+  }
+
   function highlight(source) {
     let out = "";
     let match;
@@ -117,7 +126,14 @@
     return out;
   }
 
-  document.querySelectorAll(".code-frame code").forEach((block) => {
-    block.innerHTML = highlight(block.textContent);
+  document.querySelectorAll(".code-frame").forEach((frame) => {
+    const source = frame.querySelector("script:not([src])");
+    if (!source) return;
+
+    const pre = document.createElement("pre");
+    const code = document.createElement("code");
+    code.innerHTML = highlight(dedent(source.textContent));
+    pre.appendChild(code);
+    source.before(pre);
   });
 })();

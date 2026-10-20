@@ -17,26 +17,22 @@
         "Let's practice working with value types and comparisons (Chapter 4, Pillar 3) where coercion will need to be involved.
       </p>
       <p class="description">
-        <code>scheduleMeeting(..)</code> should take a start time (in 24-hour format as a string "hh:mm") and a meeting duration (number of minutes).
-         It should return true if the meeting falls entirely within the work day (according to th etimes specified <code>dayStart</code> and <code>dayEnd</code>);
-          return <code>false</code> if the meeting violates the work day bounds."
+        <code>scheduleMeeting(..)</code> should take a start time (in 24-hour format as a string "hh:mm")
+         and a meeting duration (number of minutes). It should return true if the meeting falls entirely within the work day
+          (according to the times specified <code>dayStart</code> and <code>dayEnd</code>); return <code>false</code> 
+          if the meeting violates the work day bounds."
       </p>
 
       <section class="code-frame" aria-label="Problem code">
         <header>JavaScript</header>
-        <!-- TODO: replace with the book's code -->
-        <pre><code>function foo() {
-  var a = 2;
+        <script>
+          const dayStart = "07:30";
+          const dayEnd = "17:45";
 
-  function bar() {
-    console.log(a);
-  }
-
-  return bar;
-}
-
-var baz = foo();
-baz();</code></pre>
+          function scheduleMeeting(startTime, durationMinutes) {
+            // TODO
+          }
+        </script>
       </section>
     </main>
   </body>
