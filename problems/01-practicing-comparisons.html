@@ -30,10 +30,27 @@
           const dayEnd = "17:00";
 
           function scheduleMeeting(startTime, durationMinutes) {
-            // Write your implementation here!
-            if (startTime < dayStart) {
+
+            // Helper function to convert "hh:mm" parameter into minutes total
+            function timeToMinutes(timeStr) {
+              const [hours, minutes] = timeStr.split(":");
+              // Number() is the coercion. (String input --> Number value)
+              return Number(hours) * 60 + Number(minutes);
+            }
+
+            const startMinutes = timeToMinutes(startTime);
+            const endMinutes = startMinutes + durationMinutes;
+            
+            const dayStartMinutes = timeToMinutes(dayStart);
+            const dayEndMinutes = timeToMinutes(dayEnd);
+
+            if (startMinutes <= dayStartMinutes) {
               return false;
             }
+            if (endMinutes > dayEndMinutes) {
+              return false;
+            }
+            return true;
           }
         </script>
       </section>
