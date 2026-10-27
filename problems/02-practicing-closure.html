@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>02 — Practicing Closure</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script src="../js/highlight.js" defer></script>
+</head>
+
+<body>
+  <main class="page">
+    <a class="back" href="../index.html">All problems</a>
+
+    <h1>The Range array[num]</h1>
+
+    <p class="description">
+      Now let's practice working with closure (Chapter 4, Pillar 1).
+    </p>
+    <p class="description">
+      The <code>range(..)</code> function takes a number as its first argument, representing the first number in a
+      desired range of numbers.
+      The second argument is also a number representing the end of the desired range (inclusive). If the second argument
+      is omitted, then
+      another function should be returned that expects that argument.
+    </p>
+
+    <section class="code-frame" aria-label="Problem code">
+      <header>JavaScript</header>
+      <script>
+        function range(start, end) {
+          // A helper function that builds the array given an end value.
+          // Because it's defined inside `range`,
+          // it has access to `start` via closure!
+          function getRange(endVal) {
+            var arr = [];
+            for (let i = start; i <= endVal; i++) {
+              arr.push(i);
+            }
+            return arr;
+          }
+
+          // If both arguments are provided, compute and return
+          //  the array immediately
+          if (end !== undefined) {
+            return getRange(end);
+          }
+          // If `end` is omitted, return the inner function itself
+          //  so it remembers `start`
+          else {
+            return getRange;
+          }
+        }
+      </script>
+    </section>
+
+    <!-- TESTER CONTROL PANEL -->
+    <section class="tester-panel" aria-label="Function Controls">
+      <h2>Test Function</h2>
+
+      <div class="field-group">
+        <label for="startValInput">Start Range Value:</label>
+        <input type="number" id="startValInput" value="3" placeholder="e.g. 3" />
+      </div>
+
+      <div class="field-group">
+        <label for="endValInput">End Range Value:</label>
+        <input type="number" id="endValInput" value="8" placeholder="e.g. 8" />
+      </div>
+
+      <div class="field-group">
+        <label for="execTypeSelect">Call Type:</label>
+        <select id="execTypeSelect">
+          <option value="direct">Direct Call: range(start, end)</option>
+          <option value="curried">Closure Call: var startN = range(start); startN(end);</option>
+          <option value="startOnly">Start Only: var startN = range(start);</option>
+        </select>
+      </div>
+
+      <button type="button" class="exec-btn" id="runBtn">Execute Function</button>
+
+      <div class="output-console" id="outputConsole" style="white-space: pre-wrap; font-family: monospace;">
+        Outputs and return values will appear here...
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('runBtn').addEventListener('click', function () {
+      const startValRaw = document.getElementById('startValInput').value;
+      const endValRaw = document.getElementById('endValInput').value;
+      const execType = document.getElementById('execTypeSelect').value;
+      const outputConsole = document.getElementById('outputConsole');
+
+      outputConsole.textContent = '';
+
+      const startVal = startValRaw !== '' ? Number(startValRaw) : undefined;
+      const endVal = endValRaw !== '' ? Number(endValRaw) : undefined;
+      const varName = startVal !== undefined ? `start${startVal}` : 'startFn';
+
+      const logs = [];
+      const originalLog = console.log;
+      console.log = function (...args) {
+        logs.push(args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' '));
+        originalLog.apply(console, args);
+      };
+
+      try {
+        let codeSteps = [];
+        let finalResult;
+
+        if (execType === 'direct') {
+          codeSteps.push(`// Executing direct call:`);
+          codeSteps.push(`const result = range(${startVal}, ${endVal});`);
+          finalResult = range(startVal, endVal);
+
+        } else if (execType === 'curried') {
+          codeSteps.push(`// Step 1: Create partial function and hold closure over start = ${startVal}`);
+          codeSteps.push(`var ${varName} = range(${startVal});`);
+          
+          const fn = range(startVal);
+
+          if (typeof fn === 'function') {
+            codeSteps.push(`// ${varName} now holds: function getRange(endVal) { ... } (closure remembers start = ${startVal})`);
+            codeSteps.push(``);
+            codeSteps.push(`// Step 2: Invoke the stored function with end = ${endVal}`);
+            codeSteps.push(`const result = ${varName}(${endVal});`);
+            finalResult = fn(endVal);
+          } else {
+            codeSteps.push(`// Warning: range(${startVal}) did not return a function!`);
+            finalResult = fn;
+          }
+
+        } else if (execType === 'startOnly') {
+          codeSteps.push(`// Step 1: Create partial function and hold closure over start = ${startVal}`);
+          codeSteps.push(`var ${varName} = range(${startVal});`);
+          finalResult = range(startVal);
+        }
+
+        let outputText = codeSteps.join('\n') + '\n\n';
+
+        if (logs.length > 0) {
+          outputText += `[Console Logs]:\n${logs.join('\n')}\n\n`;
+        }
+
+        if (typeof finalResult === 'function') {
+          outputText += `[Return Value]: [Function: getRange] (Closure active: remembers start = ${startVal})`;
+        } else {
+          outputText += `[Return Value]: ${JSON.stringify(finalResult)}`;
+        }
+
+        outputConsole.textContent = outputText;
+      } catch (error) {
+        outputConsole.textContent = `[Error]: ${error.message}`;
+      } finally {
+        console.log = originalLog;
+      }
+    });
+  </script>
+</body>
+
+</html>
